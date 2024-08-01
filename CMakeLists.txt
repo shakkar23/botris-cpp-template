@@ -4,12 +4,18 @@ cmake_minimum_required(VERSION 3.22)
 project("botris bot")
 set(CMAKE_CXX_STANDARD 20)
 
-set(USE_TLS ON)
-set(USE_WS ON)
+if(UNIX AND NOT APPLE)
+    option(USE_TLS "" ON)
+    option(USE_WS "" ON)
 
-add_subdirectory("./modules/IXWebSocket")
+    add_subdirectory("./modules/IXWebSocket")
 
-find_package(ixwebsocket)
+    find_package(ixwebsocket)
+else()
+    find_package(ixwebsocket CONFIG REQUIRED)
+
+endif()
+
 
 set(main_sources
     "src/main.cpp"
@@ -20,3 +26,4 @@ set(main_sources
 add_executable(main ${main_sources})
 
 target_link_libraries(main PRIVATE ixwebsocket::ixwebsocket)
+include_directories(include)
