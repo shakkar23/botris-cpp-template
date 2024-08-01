@@ -17,6 +17,9 @@
 #include <ixwebsocket/IXUserAgent.h>
 #include <ixwebsocket/IXWebSocket.h>
 
+
+#include "json.hpp"
+
 #include <iostream>
 
 int main() {
